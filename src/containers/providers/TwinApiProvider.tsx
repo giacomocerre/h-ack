@@ -6,12 +6,14 @@ const client = memoriApiClient();
 export type TwinApiProviderProps = {
   children: React.ReactNode;
   memoriID: string;
+  password: string;
 };
 
 export type TwinApiProviderContextType = {
   sessionId: string | undefined;
   messages: Array<Message>
   sendMessage: (message: string) => Promise<void>
+  startSession: (birthDate: string) => Promise<void>
 };
 
 export const TwinApiProviderContext = createContext<TwinApiProviderContextType>(
@@ -19,6 +21,7 @@ export const TwinApiProviderContext = createContext<TwinApiProviderContextType>(
     sessionId: undefined,
     messages: [],
     sendMessage: async () => {},
+    startSession: async () => {},
   }
 );
 
@@ -31,15 +34,18 @@ export type TextMessage = {
 
 export type Message = TextMessage // Add more type here
 
-export const TwinApiProvider = ({ children, memoriID }: TwinApiProviderProps) => {
+export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProviderProps) => {
   const [sessionId, setSessionId] = useState<string>()
   const [messages, setMessages] = useState<Array<Message>>([])
 
-  const fetchSession = useCallback(async () => {
+  const startSession = useCallback(async (birthDate: string) => {
+
     if (sessionId) return
 
     const { sessionID, currentState, ...resp } = await client.initSession({
       memoriID,
+      password,
+      birthDate,
     })
 
     if (sessionID && currentState && resp.resultCode === 0) {
@@ -54,7 +60,7 @@ export const TwinApiProvider = ({ children, memoriID }: TwinApiProviderProps) =>
         }])
       }
     }
-  }, [sessionId, memoriID])
+  }, [sessionId, memoriID, password])
 
   const sendMessage = async (message: string) => {
     if (!sessionId) {
@@ -83,14 +89,11 @@ export const TwinApiProvider = ({ children, memoriID }: TwinApiProviderProps) =>
     }
   }
 
-  useEffect(() => {
-    if (!sessionId) fetchSession()
-  }, [sessionId, fetchSession])
-
   const contextValue: TwinApiProviderContextType = {
     sessionId,
     messages,
-    sendMessage
+    sendMessage,
+    startSession,
   };
 
   return (
