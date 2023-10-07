@@ -1,5 +1,5 @@
 export interface SvgPathProps {
-    fileName: string;
+    icon: string;
     color: string;
     size: number;
 }
