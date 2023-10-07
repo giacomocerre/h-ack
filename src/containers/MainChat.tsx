@@ -38,7 +38,7 @@ export const MainChat: FunctionComponent = () => {
     if (!message) return
 
     await sendMessage(val)
-    appendMsg({type: 'text', content: {text: message}})
+    appendMsg({type: 'text', content: {text: message}, position: 'right'})
   }
 
   function renderMessageContent(msg: MessageProps) {
