@@ -1,0 +1,4 @@
+// Get the color-background property from the active theme map and apply its value to the "background" css property
+body {
+    @include theme-aware('background', 'color-background');
+}

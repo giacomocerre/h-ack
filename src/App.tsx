@@ -2,15 +2,28 @@ import './App.css';
 import { TwinApiProvider } from './containers/providers/TwinApiProvider';
 import env from 'react-dotenv'
 import { ReactComponent as Logo } from './assets/icons/chat.svg';
+import { ThemeContext } from './containers/providers/ThemeProvider';
+import { useContext } from 'react';
 
-const {MEMORY_TWIN_ID, MEMORY_TWIN_PASSWORD} = env
+const { MEMORY_TWIN_ID, MEMORY_TWIN_PASSWORD } = env
 
 function App() {
+  const contextValue = useContext(ThemeContext);
+  console.log(contextValue)
+  if (!contextValue) {
+    // Handle the case where the context value is undefined
+    return <div>Loading...</div>;
+  }
+
+  const { theme, toggleTheme } = contextValue;
+
   return (
     <TwinApiProvider memoriID={MEMORY_TWIN_ID} password={MEMORY_TWIN_PASSWORD}>
-      <div className="App">
+      <div className={`App theme-${theme}`}>
         <h1>OTIS</h1>
-        <Logo fill='red' stroke='green' width={100} height={100}/>
+        <button  onClick={() => toggleTheme('dark')}>Dark Theme</button>
+        <button  onClick={() => toggleTheme('light')}>Light Theme</button>
+        <Logo fill='red' stroke='green' width={100} height={100} />
       </div>
     </TwinApiProvider>
   );
