@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import memoriApiClient from "@memori.ai/memori-api-client";
 
 const client = memoriApiClient();
@@ -12,6 +12,7 @@ export type TwinApiProviderProps = {
 export type TwinApiProviderContextType = {
   sessionId: string | undefined;
   messages: Array<Message>
+  isTyping: boolean
   sendMessage: (message: string) => Promise<void>
   startSession: (birthDate: string) => Promise<void>
 };
@@ -20,6 +21,7 @@ export const TwinApiProviderContext = createContext<TwinApiProviderContextType>(
   {
     sessionId: undefined,
     messages: [],
+    isTyping: false,
     sendMessage: async () => {},
     startSession: async () => {},
   }
@@ -36,6 +38,7 @@ export type Message = TextMessage // Add more type here
 
 export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProviderProps) => {
   const [sessionId, setSessionId] = useState<string>()
+  const [isTyping, setIsTyping] = useState<boolean>(false)
   const [messages, setMessages] = useState<Array<Message>>([])
 
   const startSession = useCallback(async (birthDate: string) => {
@@ -75,23 +78,29 @@ export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProvide
         content: { text: message },
       }])
 
+      setIsTyping(true)
+
       const { currentState, ...resp } = await client.postTextEnteredEvent({
         sessionId,
         text: message
       })
 
-      if (currentState.emission && resp.resultCode === 0)
-      setMessages((messages) => [...messages, {
-        timestamp: Date.now(),
-        type: 'text',
-        content: { text: currentState.emission! },
-      }])
+      setIsTyping(false)
+
+      if (currentState.emission && resp.resultCode === 0) {
+        setMessages((messages) => [...messages, {
+          timestamp: Date.now(),
+          type: 'text',
+          content: { text: currentState.emission! },
+        }])
+      }
     }
   }
 
   const contextValue: TwinApiProviderContextType = {
     sessionId,
     messages,
+    isTyping,
     sendMessage,
     startSession,
   };
