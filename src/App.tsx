@@ -4,6 +4,7 @@ import env from 'react-dotenv'
 import { ReactComponent as Logo } from './assets/icons/chat.svg';
 import { ThemeContext } from './containers/providers/ThemeProvider';
 import { useContext } from 'react';
+import HomeComponent from './components/home.component';
 
 const { MEMORY_TWIN_ID, MEMORY_TWIN_PASSWORD } = env
 
@@ -16,14 +17,20 @@ function App() {
   }
 
   const { theme, toggleTheme } = contextValue;
-
+  const data = {
+    logo: 'path/to/logo.png',
+    title: 'My App',
+    background: '#eaeaea',
+    message: 'Welcome to my app!',
+  };
   return (
     <TwinApiProvider memoriID={MEMORY_TWIN_ID} password={MEMORY_TWIN_PASSWORD}>
       <div className={`App theme-${theme}`}>
-        <h1>OTIS</h1>
+        {/* <h1>OTIS</h1>
         <button  onClick={() => toggleTheme('dark')}>Dark Theme</button>
         <button  onClick={() => toggleTheme('light')}>Light Theme</button>
-        <Logo fill='red' stroke='green' width={100} height={100} />
+        <Logo fill='red' stroke='green' width={100} height={100} /> */}
+        <HomeComponent {...data}/>
       </div>
     </TwinApiProvider>
   );
