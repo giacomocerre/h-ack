@@ -13,6 +13,7 @@ export type TwinApiProviderContextType = {
   sessionId: string | undefined;
   messages: Array<Message>
   isTyping: boolean
+  latestResponse: TextMessage | undefined
   sendMessage: (message: string) => Promise<void>
   startSession: (birthDate: string) => Promise<void>
 };
@@ -22,6 +23,7 @@ export const TwinApiProviderContext = createContext<TwinApiProviderContextType>(
     sessionId: undefined,
     messages: [],
     isTyping: false,
+    latestResponse: undefined,
     sendMessage: async () => {},
     startSession: async () => {},
   }
@@ -38,6 +40,7 @@ export type Message = TextMessage // Add more type here
 
 export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProviderProps) => {
   const [sessionId, setSessionId] = useState<string>()
+  const [latestResponse, setLatestResponse] = useState<TextMessage>()
   const [isTyping, setIsTyping] = useState<boolean>(false)
   const [messages, setMessages] = useState<Array<Message>>([])
 
@@ -88,11 +91,15 @@ export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProvide
       setIsTyping(false)
 
       if (currentState.emission && resp.resultCode === 0) {
-        setMessages((messages) => [...messages, {
+        const message: TextMessage = {
           timestamp: Date.now(),
           type: 'text',
           content: { text: currentState.emission! },
-        }])
+        }
+
+        setMessages((messages) => [...messages, message])
+
+        setLatestResponse(() => message )
       }
     }
   }
@@ -103,6 +110,7 @@ export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProvide
     isTyping,
     sendMessage,
     startSession,
+    latestResponse
   };
 
   return (

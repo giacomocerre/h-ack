@@ -1,13 +1,13 @@
 import { FunctionComponent, useEffect } from "react";
 import { useTwinApiContext } from "./providers/TwinApiProvider";
+import '@chatui/core/es/styles/index.less';
 import Chat, { Bubble, MessageProps, useMessages } from "@chatui/core";
-
+import '@chatui/core/dist/index.css';
 
 export const MainChat: FunctionComponent = () => {
   const { messages, appendMsg, setTyping } = useMessages([])
 
-  const {startSession, sendMessage, isTyping } = useTwinApiContext()
-
+  const {startSession, sendMessage, isTyping, latestResponse  } = useTwinApiContext()
 
   useEffect(() => {
     setTyping(isTyping)
@@ -16,6 +16,21 @@ export const MainChat: FunctionComponent = () => {
   useEffect(() => {
     startSession("1991-01-01")
   }, [startSession])
+
+  useEffect(() => {
+    if (latestResponse) {
+      appendMsg({
+        type: 'text',
+        content: {text: latestResponse.content.text}
+      })
+    }
+  }, [appendMsg, latestResponse])
+
+  // useEffect(() => {
+  //   twinMessages.forEach((msg) => {
+  //     appendMsg({type: 'text', content: {text: msg}})
+  //   })
+  // })
 
   const handleSend = async (type: string, val: string) => {
     const message = val.trim()

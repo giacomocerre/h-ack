@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from './assets/icons/chat.svg';
 import { ThemeContext } from './containers/providers/ThemeProvider';
 import { useContext } from 'react';
 import HomeComponent from './components/home.component';
+import { MainChat } from './containers/MainChat';
 
 const { MEMORY_TWIN_ID, MEMORY_TWIN_PASSWORD } = env
 
@@ -31,6 +32,7 @@ function App() {
         <button  onClick={() => toggleTheme('light')}>Light Theme</button>
         <Logo fill='red' stroke='green' width={100} height={100} /> */}
         <HomeComponent {...data}/>
+        <MainChat />
       </div>
     </TwinApiProvider>
   );
