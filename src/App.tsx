@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import HomeComponent from './components/home.component';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ChatComponent from './components/chat.component';
+import logo from "./assets/img/logo.png"
 
 
 
@@ -21,10 +22,10 @@ function App() {
 
   const { theme, toggleTheme } = contextValue;
   const data = {
-    logo: 'path/to/logo.png',
-    title: 'My App',
-    background: '#eaeaea',
-    message: 'Welcome to my app!',
+    logo: logo,
+    title: 'Intimate',
+    background: '../assets/img/background.jpg',
+    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus ex, mattis ut neque id, pellentesque suscipit mi. Nulla sollicitudin odio libero, vel cursus augue sodales quis.',
   };
   return (
     <Router>

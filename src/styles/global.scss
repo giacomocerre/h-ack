@@ -1,3 +1,56 @@
 .ChatApp {
     height: 100vh;
 }
+
+* {
+    color: #f6f6f6;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+// Home Component
+.home-content {
+    background: url('../assets/img/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.main-title {
+    font-size: 2.8em;
+}
+
+.home-info-container {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.message-print {
+    text-align: left;
+    margin-top: 50px;
+}
+
+.start-button {
+    background-color: #f6f6f6;
+    width: 50%;
+    margin: auto;
+    margin-top: 200px;
+    padding: 1px;
+    border-radius: 100px;
+}
+
+.button-value {
+    color: #EB5473;
+    font-weight: 700;
+}
+
+.message-print {
+    text-align: left;
+    margin-top: 50px;
+    background: rgba(246, 246, 246, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    height: 130px;
+}
