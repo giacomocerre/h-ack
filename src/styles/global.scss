@@ -44,6 +44,7 @@
     padding: 1px;
     border-radius: 100px;
 }
+
 .start-button a {
     text-decoration: none;
 }
@@ -75,6 +76,7 @@ p.message-write {
     left: 20px;
     width: 65%;
 }
+
 .message-print {
     text-align: left;
     margin-top: 50px;
@@ -154,7 +156,7 @@ p.error {
 button.verify-button {
     padding: 14px 28px;
     width: 50%;
-    background:#f1766d;
+    background: #f1766d;
     border: none;
     border-radius: 100px;
     margin-left: 25%;
@@ -163,9 +165,11 @@ button.verify-button {
 .verify-action {
     padding-bottom: 20px;
 }
+
 option.age-select {
-    font-size: 15px!important;
+    font-size: 15px !important;
 }
+
 .age-actions-content {
     position: relative;
     top: 20%;
@@ -183,4 +187,62 @@ p.verify-descr {
     width: 80%;
     margin: auto;
     font-size: 0.9em;
+}
+
+//SEGGESTION PAGE
+.suggestion-main-content header {
+    padding: 40px 0 40px 0;
+    background: url('../assets/img/suggest.png');
+    border-bottom-right-radius: 100px;
+    background-size: cover;
+    height: 140px;
+    background-position: center;
+}
+
+.suggestion-main-content header {
+    padding: 40px 0 40px 0;
+}
+
+.widget-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.image-container {
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+h2.suggest-title {
+    font-size: 1.8em;
+    margin-left: 20px;
+    margin-top: 80px;
+}
+
+img.circular-image {
+    border-radius: 100px;
+    width: 50px;
+    position: relative;
+    top: 5px;
+}
+
+.text-container p {
+    color: #333;
+    font-size: 0.8em;
+    margin: 0;
+}
+
+.text-container h2 {
+    color: #f1766d;
+    font-weight: 900;
+    font-size: 1.3em;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.suggestion-main-content {
+    background: #F0A695;
+    height: 100%;
 }
