@@ -20,7 +20,7 @@ function App() {
   const data = {
     logo: logo,
     title: 'Intimate',
-    message: 'Ciao, sono Otis e sono qua per ripondere ai tuoi dubbi risuardo la tua intimità.'
+    message: 'Ciao, sono Otis e sono qua per ripondere ai tuoi dubbi riguardo la tua intimità.'
   };
   const suggestWidgetsMock = [
     {
