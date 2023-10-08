@@ -20,8 +20,8 @@ const SuggestList = ({ data }: WidgetListProps) => {
             <div className='suggest-list-content'>
                 {data.map((item, index) => (
                     <div key={index} className="widget-container">
-                        <div className="image-container">
-                            <img src={item.image} alt={item.title} className="circular-image" />
+                        <div className="image-container" style={{background: "url("+item.image+")", backgroundSize:"cover", backgroundPosition:"center"}}>
+                            {/* <img src={item.image} alt={item.title} className="circular-image" /> */}
                         </div>
                         <div className="text-container">
                             <h2>{item.title}</h2>

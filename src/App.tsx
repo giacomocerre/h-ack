@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ChatComponent from './components/chat.component';
 import logo from "./assets/img/logo.png"
 import SuggestList from './components/suggest.component';
+import mast from "./assets/img/masturb.jpg"
+import tampax from "./assets/img/tampax.jpg"
 
 
 
@@ -24,22 +26,22 @@ function App() {
     {
       title: 'Potrei soffrire di micorpenia?',
       description: 'Quando sei pronto, ne riparliamo.',
-      image: '../assets/img/masturb.jpg', // Just a placeholder image URL (replace with your actual URLs)
+      image: mast, // Just a placeholder image URL (replace with your actual URLs)
     },
     {
       title: 'Non riesco a capire cosa mi piace.',
       description: 'E\' un buon momento per chattare? Riprendiamo da dove avevamo interrotto.',
-      image: '../assets/img/masturb.jpg',
+      image: mast,
     },
     {
       title: 'Perchè non provo piacere quando mi masturbo?',
       description: 'Quando sei pronto, completiamo insieme la tua valutazione.',
-      image: '../assets/img/masturb.jpg',
+      image: mast,
     },
     {
       title: 'Come si infila un tampax?',
       description: 'Felice di averti aiutato :)',
-      image: '../assets/img/masturb.jpg',
+      image: tampax,
     },
   ];
   return (
