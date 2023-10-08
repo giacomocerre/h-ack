@@ -6,6 +6,7 @@ import '@chatui/core/dist/index.css';
 import { useNavigate } from 'react-router-dom';
 
 import logo from '../assets/img/logo_black.png'
+import otis from '../assets/img/otis.png'
 
 export const MainChat: FunctionComponent = () => {
   const { messages, appendMsg, setTyping } = useMessages([])
@@ -35,7 +36,7 @@ export const MainChat: FunctionComponent = () => {
       appendMsg({
         type: 'text',
         content: {text: latestResponse.content.text },
-        user: {avatar: 'https://www.treedom.net/images/small_297111'},
+        user: {avatar: otis},
         createdAt: latestResponse.timestamp,
         hasTime: true,
         renderMessageContent(message) {
