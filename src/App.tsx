@@ -1,8 +1,6 @@
 import './App.css';
 import './styles/global.scss'
 import env from 'react-dotenv'
-import { ThemeContext } from './containers/providers/ThemeProvider';
-import { useContext } from 'react';
 import HomeComponent from './components/home.component';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ChatComponent from './components/chat.component';
@@ -12,12 +10,15 @@ import mast from "./assets/img/masturb.jpg"
 import tampax from "./assets/img/tampax.jpg"
 import micro from "./assets/img/micro.jpg"
 import like from "./assets/img/like.jpg"
+import { useState } from 'react';
 
 
 
 const { MEMORY_TWIN_ID, MEMORY_TWIN_PASSWORD } = env
 
 function App() {
+
+  const [newSession, setNewSession] = useState<boolean>(true)
 
   const data = {
     logo: logo,
@@ -26,7 +27,7 @@ function App() {
   };
   const suggestWidgetsMock = [
     {
-      title: 'Potrei soffrire di micorpenia?',
+      title: 'Potrei soffrire di micropenia?',
       description: 'Quando sei pronto, ne riparliamo.',
       image: micro, // Just a placeholder image URL (replace with your actual URLs)
     },
@@ -49,8 +50,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomeComponent {...data} />} />
-        <Route path="/chat" element={<ChatComponent />} />
+        <Route path="/" element={<HomeComponent startNewSession={()=> setNewSession(true)} {...data} />} />
+        <Route path="/chat" element={<ChatComponent newSession={newSession} sessionStarted={() => setNewSession(false)} birthDate={"2000-01-01"} />} />
         <Route path="/suggest" element={<SuggestList data={suggestWidgetsMock} />} />
       </Routes>
     </Router>

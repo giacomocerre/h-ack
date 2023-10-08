@@ -8,31 +8,34 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo_black.png'
 import otis from '../assets/img/otis.png'
 
-export const MainChat: FunctionComponent = () => {
-  const { messages, appendMsg, setTyping } = useMessages([])
-  const [isLoading, setIsLoading] = useState(false)
+export type MainChatProps = {
+  newSession?: boolean
+  birthDate: string
+  sessionStarted: () => void
+}
+
+export const MainChat: FunctionComponent<MainChatProps> = ({birthDate, newSession, sessionStarted}) => {
+  const { messages, appendMsg, setTyping, resetList } = useMessages([])
   const navigate = useNavigate()
 
-
-  const {sessionId, startSession, sendMessage, isTyping, latestResponse  } = useTwinApiContext()
+  const { startSession, sendMessage, isTyping, latestResponse } = useTwinApiContext()
 
   useEffect(() => {
     setTyping(isTyping)
   }, [isTyping, setTyping])
   
   useEffect(() => {
-    if(!sessionId && !isLoading){
-      console.log("HERE")
-
-      setIsLoading(true)
-      startSession("1991-01-01").then(() => {
-        setIsLoading(false)
-      })
+    if(newSession){
+      console.log("STARTING SESSION: RESET LIST")
+      resetList()
+      startSession(birthDate, newSession)
+      sessionStarted()
     }
-  }, [startSession, sessionId, isLoading, setIsLoading])
+  }, [startSession, resetList, newSession, birthDate, sessionStarted])
 
   useEffect(() => {
     if (latestResponse) {
+      console.log("APPENDING MESSAGE: BOT", latestResponse)
       appendMsg({
         type: 'text',
         content: {text: latestResponse.content.text },
