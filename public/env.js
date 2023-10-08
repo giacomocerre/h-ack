@@ -74,6 +74,6 @@ window.env = {
   "npm_config_prefix": "/opt/homebrew",
   "FIG_TERM": "2.16.0",
   "COLORTERM": "truecolor",
-  "MEMORY_TWIN_ID": "583955f9-bae5-46cc-89e5-f1895569cafc",
-  "MEMORY_TWIN_PASSWORD": "kvauaupedqfypvwsbpuxckzh"
+  "MEMORY_TWIN_ID": "d56f603f-aa95-4331-90f2-02bb182d371e",
+  "MEMORY_TWIN_PASSWORD": "acehogkjpvtiwbopkpqzmreb"
 };
