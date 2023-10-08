@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import memoriApiClient from "@memori.ai/memori-api-client";
 
 const client = memoriApiClient();
@@ -15,7 +15,7 @@ export type TwinApiProviderContextType = {
   isTyping: boolean
   latestResponse: TextMessage | undefined
   sendMessage: (message: string) => Promise<void>
-  startSession: (birthDate: string) => Promise<void>
+  startSession: (birthDate: string, newSession?: boolean) => Promise<void>
 };
 
 export const TwinApiProviderContext = createContext<TwinApiProviderContextType>(
@@ -44,16 +44,22 @@ export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProvide
   const [isTyping, setIsTyping] = useState<boolean>(false)
   const [messages, setMessages] = useState<Array<Message>>([])
 
+  const startSession = useCallback(async (birthDate: string, newSession?: boolean) => {
 
-  const getSession = useMemo (() => client.initSession, [])
+    if (sessionId && newSession) {
+      console.log('closing session', sessionId)
+      if(newSession){
+        setLatestResponse(undefined)
+        setSessionId(undefined)
+        await client.deleteSession(sessionId)
+      }
 
-  const startSession = useCallback(async (birthDate: string) => {
-
-    if (sessionId) return
+      return
+    }
 
     setIsTyping(true)
 
-    const { sessionID, currentState, ...resp } = await getSession({
+    const { sessionID, currentState, ...resp } = await client.initSession({
       memoriID,
       password,
       birthDate,
@@ -77,7 +83,7 @@ export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProvide
         setLatestResponse(() => message )
       }
     }
-  }, [sessionId, getSession, memoriID, password])
+  }, [sessionId, memoriID, password])
 
   const sendMessage = async (message: string) => {
     if (!sessionId) {

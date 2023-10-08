@@ -1,8 +1,6 @@
 import './App.css';
 import './styles/global.scss'
 import env from 'react-dotenv'
-import { ThemeContext } from './containers/providers/ThemeProvider';
-import { useContext } from 'react';
 import HomeComponent from './components/home.component';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ChatComponent from './components/chat.component';
@@ -10,12 +8,15 @@ import logo from "./assets/img/logo.png"
 import SuggestList from './components/suggest.component';
 import mast from "./assets/img/masturb.jpg"
 import tampax from "./assets/img/tampax.jpg"
+import { useState } from 'react';
 
 
 
 const { MEMORY_TWIN_ID, MEMORY_TWIN_PASSWORD } = env
 
 function App() {
+
+  const [newSession, setNewSession] = useState<boolean>(true)
 
   const data = {
     logo: logo,
@@ -47,8 +48,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomeComponent {...data} />} />
-        <Route path="/chat" element={<ChatComponent />} />
+        <Route path="/" element={<HomeComponent startNewSession={()=> setNewSession(true)} {...data} />} />
+        <Route path="/chat" element={<ChatComponent newSession={newSession} sessionStarted={() => setNewSession(false)} birthDate={"2000-01-01"} />} />
         <Route path="/suggest" element={<SuggestList data={suggestWidgetsMock} />} />
       </Routes>
     </Router>
