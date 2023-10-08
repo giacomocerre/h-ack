@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from './navigation.component';
 
 interface Widget {
     title: string;
@@ -30,6 +31,7 @@ const SuggestList = ({ data }: WidgetListProps) => {
                     </div>
                 ))}
             </div>
+            <Navigation/>
         </div>
     );
 };

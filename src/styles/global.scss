@@ -306,3 +306,27 @@ button.Btn.Btn--primary.Composer-sendBtn {
 time.Time {
     color: #f1766d;
 }
+
+.MessageContainer>.PullToRefresh>.PullToRefresh-inner {
+    padding: 0!important;
+}
+
+.suggestion-main-content {
+    background-color: #F0BEA7;
+}
+
+.suggest-list-content {
+    margin-top: 40px;
+}
+
+.nav-item {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    position: relative;
+    top: 100px;
+}
+
+.nav-item.nav-big {
+    top: 60px;
+}

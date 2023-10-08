@@ -1,20 +1,31 @@
 // Import necessary modules
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Home from '../assets/icons/home.png'
+import Chat from '../assets/icons/chat.png'
+import Suggest from '../assets/icons/suggest.png'
+
+
 
 // Define the BottomMenu component
-const BottomMenu = () => {
+const Navigation = () => {
   return (
-    <div>
-      <Link to="/home" style={styles.icon}>
-        🏠 Home
-      </Link>
-      <Link to="/chat" style={styles.icon}>
-        👤 Profile
-      </Link>
-      <Link to="/" style={styles.icon}>
-        ⚙️ Settings
-      </Link>
+    <div className='navigator-content'>
+      <div className="nav-item">
+        <Link to="/" style={styles.icon}>
+          <img src={Home} style={{width:"40px"}}/>
+        </Link>
+      </div>
+      <div className="nav-item nav-big">
+        <Link to="/chat" style={styles.icon}>
+        <img src={Chat} style={{width:"80px"}}/>
+        </Link>
+      </div>
+      <div className="nav-item">
+        <Link to="/" style={styles.icon}>
+        <img src={Suggest} style={{width:"40px"}}/>
+        </Link>
+      </div>
     </div>
   );
 };
@@ -39,4 +50,4 @@ const styles = {
 };
 
 // Export the BottomMenu component
-export default BottomMenu;
+export default Navigation;
