@@ -54,7 +54,7 @@ export const MainChat: FunctionComponent = () => {
 
   return (<Chat
       locale="it-IT"
-      navbar={{ title: 'Parla con Otis', leftContent: { icon: "chevron-left", onClick: onBackClick} }}
+      navbar={{ title: 'Parla con Otis', leftContent: { icon: "chevron-left", className: "", onClick: onBackClick} }}
       messages={messages}
       renderMessageContent={renderMessageContent}
       onSend={handleSend}
