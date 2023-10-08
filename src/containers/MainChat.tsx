@@ -3,9 +3,12 @@ import { useTwinApiContext } from "./providers/TwinApiProvider";
 import '@chatui/core/es/styles/index.less';
 import Chat, { Bubble, MessageProps, useMessages } from "@chatui/core";
 import '@chatui/core/dist/index.css';
+import { useNavigate } from 'react-router-dom';
 
 export const MainChat: FunctionComponent = () => {
   const { messages, appendMsg, setTyping } = useMessages([])
+  const navigate = useNavigate()
+
 
   const {startSession, sendMessage, isTyping, latestResponse  } = useTwinApiContext()
 
@@ -48,13 +51,12 @@ export const MainChat: FunctionComponent = () => {
   }
 
   function onBackClick() {
-    // TODO: go home your drunk
-    console.log('back')
+    navigate('/')
   }
 
   return (<Chat
       locale="it-IT"
-      navbar={{ title: 'Parla con Otis', leftContent: { icon: "chevron-left", onClick: onBackClick} }}
+      navbar={{ title: 'Parla con Otis', leftContent: { icon: "chevron-left", className:"returnBtn", onClick: onBackClick} }}
       messages={messages}
       renderMessageContent={renderMessageContent}
       onSend={handleSend}

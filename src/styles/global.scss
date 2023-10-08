@@ -246,3 +246,18 @@ img.circular-image {
     background: #F0A695;
     height: 100%;
 }
+.IconBtn.Icon, .IconBtn>img {
+    display: block;
+}
+
+p.history-suggest {
+    color: #333;
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    right: 10px;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 12px;
+    border: 1px solid #333;
+}
