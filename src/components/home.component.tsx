@@ -29,8 +29,7 @@ const HomeComponent = ({ logo, title, message }: HomeInterface) => {
   return (
     <div className='home-content'>
       <div className='home-info-container'>
-        <img src={logo} alt='Logo' />
-        <h1 className=''>{title}</h1>
+        <img className='logo' src={logo} alt='Logo' />
         <div className='message-print'>
           <p className='message-write'>{typedMessage}</p>
         </div>
