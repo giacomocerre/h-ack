@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import memoriApiClient from "@memori.ai/memori-api-client";
 
 const client = memoriApiClient();
@@ -44,29 +44,40 @@ export const TwinApiProvider = ({ children, memoriID, password }: TwinApiProvide
   const [isTyping, setIsTyping] = useState<boolean>(false)
   const [messages, setMessages] = useState<Array<Message>>([])
 
+
+  const getSession = useMemo (() => client.initSession, [])
+
   const startSession = useCallback(async (birthDate: string) => {
 
     if (sessionId) return
 
-    const { sessionID, currentState, ...resp } = await client.initSession({
+    setIsTyping(true)
+
+    const { sessionID, currentState, ...resp } = await getSession({
       memoriID,
       password,
       birthDate,
     })
+
+    setIsTyping(false)
 
     if (sessionID && currentState && resp.resultCode === 0) {
       setSessionId(sessionID)
 
       console.log('fetched session', sessionID, currentState)
       if (currentState.emission) {
-        setMessages((messages) => [...messages, {
+        const message: TextMessage = {
           timestamp: Date.now(),
           type: 'text',
           content: { text: currentState.emission! },
-        }])
+        }
+
+        setMessages((messages) => [...messages, message])
+
+        setLatestResponse(() => message )
       }
     }
-  }, [sessionId, memoriID, password])
+  }, [sessionId, getSession, memoriID, password])
 
   const sendMessage = async (message: string) => {
     if (!sessionId) {
