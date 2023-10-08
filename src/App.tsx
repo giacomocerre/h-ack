@@ -25,7 +25,7 @@ function App() {
   };
   const suggestWidgetsMock = [
     {
-      title: 'Potrei soffrire di micorpenia?',
+      title: 'Potrei soffrire di micropenia?',
       description: 'Quando sei pronto, ne riparliamo.',
       image: mast, // Just a placeholder image URL (replace with your actual URLs)
     },
