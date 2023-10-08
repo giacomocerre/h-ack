@@ -1,5 +1,5 @@
 import './App.css';
-// import './styles/global.scss'
+import './styles/global.scss'
 import env from 'react-dotenv'
 import { ThemeContext } from './containers/providers/ThemeProvider';
 import { useContext } from 'react';
