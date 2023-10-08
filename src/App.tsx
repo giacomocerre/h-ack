@@ -10,6 +10,8 @@ import logo from "./assets/img/logo.png"
 import SuggestList from './components/suggest.component';
 import mast from "./assets/img/masturb.jpg"
 import tampax from "./assets/img/tampax.jpg"
+import micro from "./assets/img/micro.jpg"
+import like from "./assets/img/like.jpg"
 
 
 
@@ -26,12 +28,12 @@ function App() {
     {
       title: 'Potrei soffrire di micorpenia?',
       description: 'Quando sei pronto, ne riparliamo.',
-      image: mast, // Just a placeholder image URL (replace with your actual URLs)
+      image: micro, // Just a placeholder image URL (replace with your actual URLs)
     },
     {
       title: 'Non riesco a capire cosa mi piace.',
       description: 'E\' un buon momento per chattare? Riprendiamo da dove avevamo interrotto.',
-      image: mast,
+      image: like,
     },
     {
       title: 'Perchè non provo piacere quando mi masturbo?',
