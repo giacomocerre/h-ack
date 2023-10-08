@@ -24,8 +24,7 @@ function App() {
   const data = {
     logo: logo,
     title: 'Intimate',
-    background: '../assets/img/background.jpg',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus ex, mattis ut neque id, pellentesque suscipit mi. Nulla sollicitudin odio libero, vel cursus augue sodales quis.',
+    message: 'Ciao, sono Otis e sono qua per ripondere ai tuoi dubbi risuardo la tua intimità.'
   };
   return (
     <Router>

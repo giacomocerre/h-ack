@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HomeInterface } from '../models/models';
 import '../styles/global.scss';
 import { Link } from 'react-router-dom';
+import AgeVerificationComponent from './ageVerify.component';
 
 const HomeComponent = ({ logo, title, message }: HomeInterface) => {
   const [typedMessage, setTypedMessage] = useState('');
@@ -20,6 +21,11 @@ const HomeComponent = ({ logo, title, message }: HomeInterface) => {
     };
   }, [typedMessage, message]);
 
+  const handleAgeVerified = (date: string) => {
+    console.log('Date of Birth:', date);
+    // Do something with the date, e.g., save it to state or send it to a server
+  };
+
   return (
     <div className='home-content'>
       <div className='home-info-container'>
@@ -28,10 +34,11 @@ const HomeComponent = ({ logo, title, message }: HomeInterface) => {
         <div className='message-print'>
           <p className='message-write'>{typedMessage}</p>
         </div>
-        <div className='start-button'>
-          <Link to="/chat"><p className='button-value'>Start Chat</p></Link>
+        <div className='start-button button-chat'>
+          <Link to="/chat"><p className='button-value button-dark'>Parliamone insieme</p></Link>
         </div>
       </div>
+      {/* <AgeVerificationComponent onAgeVerified={handleAgeVerified}/> */}
     </div>
   );
 };
